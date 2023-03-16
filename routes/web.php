@@ -30,7 +30,11 @@ Route::get('/rental', [OrderController::class, 'index']);
 Route::get('/rental-sudah-dikirim', [OrderController::class, 'alreadyShip']);
 Route::get('/rental-belum-dikirim', [OrderController::class, 'notShipYet']);
 Route::get('/rental-sudah-lunas', [OrderController::class, 'alreadyPaid']);
-Route::get('/rental-belum-lunas', [OrderController::class, 'unpaid']);
+Route::get('/pengembalian-sudah-dikirim', [OrderController::class, 'alreadyReturned']);
+Route::get('/pengembalian-belum-dikirim', [OrderController::class, 'notReturnedYet']);
+Route::get('/pengembalian-terlambat', [OrderController::class, 'lateReturned']);
+
+Route::get('/', [OrderController::class, 'unpaid']);
 
 Route::get('/import', function () {
     Excel::import(new CostumesImport, 'cost.xlsx');

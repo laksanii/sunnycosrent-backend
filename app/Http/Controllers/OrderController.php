@@ -42,4 +42,25 @@ class OrderController extends Controller
             'orders' => Order::where('payment_status', 'belum lunas')->get(),
         ]);
     }
+
+    public function alreadyReturned()
+    {
+        return view('alreadyReturned', [
+            'orders' => Order::where('return_receipt', '!=', null)->get()
+        ]);
+    }
+
+    public function notReturnedYet()
+    {
+        return view('notReturnedYet', [
+            'orders' => Order::where('return_status', 'Belum dikembalikan')->get()
+        ]);
+    }
+
+    public function lateReturned()
+    {
+        return view('lateReturned', [
+            'orders' => Order::where('return_status', 'terlambat')->get()
+        ]);
+    }
 }
