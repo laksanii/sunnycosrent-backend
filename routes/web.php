@@ -1,5 +1,8 @@
 <?php
 
+use App\Imports\AccImport;
+use App\Imports\CostumesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/import', function () {
+    Excel::import(new CostumesImport, 'cost.xlsx');
+
+    return response()->json(["Success"]);
+});
+
+Route::get('/import-acc', function () {
+    Excel::import(new AccImport, 'acc.xlsx');
+
+    return response()->json(["Success"]);
 });

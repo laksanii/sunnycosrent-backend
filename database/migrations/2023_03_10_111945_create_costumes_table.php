@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('costumes', function (Blueprint $table) {
             $table->id();
+            $table->string("name", 255);
+            $table->bigInteger("category_id")->unsigned();
+            $table->string("sizes", 15);
+            $table->string("ld", 10);
+            $table->string("lp", 10);
+            $table->decimal("price", 10, 0);
+            $table->string("status")->default('ready');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
