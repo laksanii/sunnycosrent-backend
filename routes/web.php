@@ -34,7 +34,7 @@ Route::get('/pengembalian-sudah-dikirim', [OrderController::class, 'alreadyRetur
 Route::get('/pengembalian-belum-dikirim', [OrderController::class, 'notReturnedYet']);
 Route::get('/pengembalian-terlambat', [OrderController::class, 'lateReturned']);
 
-Route::get('/', [OrderController::class, 'unpaid']);
+Route::post('/tambah-costume', [CostumeController::class, 'store']);
 
 Route::get('/import', function () {
     Excel::import(new CostumesImport, 'cost.xlsx');

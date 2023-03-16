@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Costume;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseFormatter;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCostumeRequest;
 
 class CostumeController extends Controller
 {
@@ -14,7 +18,8 @@ class CostumeController extends Controller
     public function index()
     {
         return view('costumes', [
-            'costumes' => Costume::all()
+            'costumes' => Costume::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -52,5 +57,20 @@ class CostumeController extends Controller
         return view('costumesBook', [
             'costumes' => $costumes
         ]);
+    }
+
+    public function store(StoreCostumeRequest $request)
+    {
+        //code...
+        $costume = Costume::create([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'sizes' => $request->sizes,
+            'ld' => $request->ld,
+            'lp' => $request->lp,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->back()->with('success', 'Kostum berhasil ditambah');
     }
 }
