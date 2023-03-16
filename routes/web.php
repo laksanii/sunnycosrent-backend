@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CostumeController;
 use App\Imports\AccImport;
 use App\Imports\CostumesImport;
@@ -24,6 +25,12 @@ Route::get('/', function () {
 Route::get('/costumes', [CostumeController::class, 'index']);
 Route::get('/costumes-available', [CostumeController::class, 'available']);
 Route::get('/costumes-booked', [CostumeController::class, 'booked']);
+
+Route::get('/rental', [OrderController::class, 'index']);
+Route::get('/rental-sudah-dikirim', [OrderController::class, 'alreadyShip']);
+Route::get('/rental-belum-dikirim', [OrderController::class, 'notShipYet']);
+Route::get('/rental-sudah-lunas', [OrderController::class, 'alreadyPaid']);
+Route::get('/rental-belum-lunas', [OrderController::class, 'unpaid']);
 
 Route::get('/import', function () {
     Excel::import(new CostumesImport, 'cost.xlsx');

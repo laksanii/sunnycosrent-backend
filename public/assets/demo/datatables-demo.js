@@ -3,5 +3,6 @@ $(document).ready(function () {
     $("#dataTable").DataTable({
         responsive: true,
         lengthChange: false,
+        autoWidth: false,
     });
 });
