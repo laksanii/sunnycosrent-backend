@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CostumeController;
 use App\Imports\AccImport;
 use App\Imports\CostumesImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/costumes', [CostumeController::class, 'index']);
 
 Route::get('/import', function () {
     Excel::import(new CostumesImport, 'cost.xlsx');

@@ -2,7 +2,7 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
@@ -17,9 +17,9 @@
             </a>
             <div class="collapse" id="kostum" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="layout-sidenav-light.html">Semua Kostum</a>
-                    <a class="nav-link" href="layout-static.html">Available</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Booked</a>
+                    <a class="nav-link" href="/costumes">Semua Kostum</a>
+                    <a class="nav-link" href="/costumes-available">Available</a>
+                    <a class="nav-link" href="/costumes-booked">Booked</a>
                 </nav>
             </div>
 
@@ -33,10 +33,11 @@
             </a>
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="layout-static.html">Sudah Dikirim</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Belum Dikirim</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Sudah Lunas</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Belum Lunas</a>
+                    <a class="nav-link" href="/rental">Semua Rental</a>
+                    <a class="nav-link" href="/rental-sudah-dikirim">Sudah Dikirim</a>
+                    <a class="nav-link" href="/rental-belum-dikirim">Belum Dikirim</a>
+                    <a class="nav-link" href="/rental-sudah-lunas">Sudah Lunas</a>
+                    <a class="nav-link" href="/rental-belum-lunas">Belum Lunas</a>
                 </nav>
             </div>
 
@@ -48,9 +49,9 @@
             </a>
             <div class="collapse" id="pengembalian" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="layout-static.html">Sudah Dikirim</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Belum Dikirim</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Terlambat</a>
+                    <a class="nav-link" href="/pengembalian-sudah-dikirim">Sudah Dikirim</a>
+                    <a class="nav-link" href="/pengembalian-belum-dikirim">Belum Dikirim</a>
+                    <a class="nav-link" href="/pengembalian-terlambat">Terlambat</a>
                 </nav>
             </div>
         </div>
