@@ -19,7 +19,8 @@ class CostumeController extends Controller
     {
         return view('costumes', [
             'costumes' => Costume::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'title' => "Daftar kostum"
         ]);
     }
 
@@ -37,7 +38,8 @@ class CostumeController extends Controller
         // $costumes =
         //     DB::table('costumes')->whereRaw("id NOT IN (SELECT costume_id from orders WHERE rent_date BETWEEN DATE_ADD ('$start',INTERVAL - 4 DAY) and DATE_ADD('$finish' , INTERVAL 4 DAY))")->get();
         return view('costumesAvail', [
-            'costumes' => $costumes
+            'costumes' => $costumes,
+            'title' => "Daftar kostum available"
         ]);
     }
 
@@ -55,7 +57,8 @@ class CostumeController extends Controller
         // $costumes =
         //     DB::table('costumes')->whereRaw("id NOT IN (SELECT costume_id from orders WHERE rent_date BETWEEN DATE_ADD ('$start',INTERVAL - 4 DAY) and DATE_ADD('$finish' , INTERVAL 4 DAY))")->get();
         return view('costumesBook', [
-            'costumes' => $costumes
+            'costumes' => $costumes,
+            'title' => "Daftar kostum booked"
         ]);
     }
 

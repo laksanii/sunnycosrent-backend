@@ -3,6 +3,12 @@
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Daftar Rental Belum Lunas</h1>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -35,7 +41,13 @@
                                 <td>{{ $order->costume->name }}</td>
                                 <td>{{ $order->payment_status }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm">Edit</div>
+                                    <form action="/sudah-bayar" method="post">
+                                        @csrf
+                                        <input type="text" name="code" id="code" value="{{ $order->code }}"
+                                            hidden>
+                                        <button type="submit" class="btn btn-success btn-sm">Sudah
+                                            dibayar</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

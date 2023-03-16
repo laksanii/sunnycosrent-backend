@@ -11,13 +11,15 @@ class OrderController extends Controller
     public function index()
     {
         return view('orders', [
-            'orders' => Order::all()
+            'orders' => Order::all(),
+            'title' => "Daftar Rental"
         ]);
     }
     public function detail($code)
     {
         return view('order', [
-            'order' => Order::where('code', $code)->first()
+            'order' => Order::where('code', $code)->first(),
+            'title' => "Detail Rental"
         ]);
     }
 
@@ -26,6 +28,7 @@ class OrderController extends Controller
     {
         return view('ordersAlreadyShip', [
             'orders' => Order::where('shipping_status', '!=', 'Diproses')->get(),
+            'title' => "Daftar rental sudah dikirim"
         ]);
     }
 
@@ -33,6 +36,7 @@ class OrderController extends Controller
     {
         return view('ordersNotShipYet', [
             'orders' => Order::where('shipping_status', 'Diproses')->get(),
+            'title' => "Daftar rental belum dikirim"
         ]);
     }
 
@@ -40,6 +44,7 @@ class OrderController extends Controller
     {
         return view('alreadyPaid', [
             'orders' => Order::where('payment_status', 'lunas')->get(),
+            'title' => "Daftar rental sudah lunas"
         ]);
     }
 
@@ -47,27 +52,31 @@ class OrderController extends Controller
     {
         return view('unpaid', [
             'orders' => Order::where('payment_status', 'belum lunas')->get(),
+            'title' => "Daftar rental belum lunas"
         ]);
     }
 
     public function alreadyReturned()
     {
         return view('alreadyReturned', [
-            'orders' => Order::where('return_receipt', '!=', null)->get()
+            'orders' => Order::where('return_receipt', '!=', null)->get(),
+            'title' => "Daftar rental sudah dikirim kembali"
         ]);
     }
 
     public function notReturnedYet()
     {
         return view('notReturnedYet', [
-            'orders' => Order::where('return_status', 'Belum dikembalikan')->get()
+            'orders' => Order::where('return_status', 'Belum dikembalikan')->get(),
+            'title' => "Daftar rental belum dikembalikan"
         ]);
     }
 
     public function lateReturned()
     {
         return view('lateReturned', [
-            'orders' => Order::where('return_status', 'terlambat')->get()
+            'orders' => Order::where('return_status', 'terlambat')->get(),
+            'title' => "Daftar rental terlambat kembali"
         ]);
     }
 
@@ -76,6 +85,17 @@ class OrderController extends Controller
         $code = $request->code;
         $order = Order::where('code', $code)->first();
         $order->shipping_status = $request->shipping_status;
+
+        $order->save();
+
+        return redirect()->back()->with('success', 'Berhasil mengubah status');
+    }
+
+    public function sudahBayar(Request $request)
+    {
+        $code = $request->code;
+        $order = Order::where('code', $code)->first();
+        $order->payment_status = 'lunas';
 
         $order->save();
 

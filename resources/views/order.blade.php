@@ -115,6 +115,22 @@
                                 Rp {{ number_format($order->total_price, 0, ',', '.') }}
                             </div>
                         </div>
+                        <div class="row mb-1 gap-1 justify-content-center">
+                            <div class="fw-bold col-4 bg-warning py-2 rounded">
+                                Aksesoris
+                            </div>
+                            <div class="col-7 bg-warning py-2 rounded">
+                                @if ($order->order_accessories->count() < 1)
+                                    Tidak pakai aksesoris
+                                @else
+                                    <ul>
+                                        @foreach ($order->order_accessories as $accessory)
+                                            <li>{{ $accessory->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 col-lg-4 ">
                         <div class="d-flex flex-column align-items-center fw-bold">

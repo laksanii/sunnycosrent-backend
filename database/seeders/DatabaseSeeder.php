@@ -39,17 +39,17 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // $faker = Faker::create();
+        $faker = Faker::create();
 
-        // $costumes = Costume::all();
+        $costumes = Costume::all();
 
-        // foreach ($costumes as $costume) {
-        //     for ($i = 0; $i < 3; $i++) {
-        //         DB::table('costume_picts')->insert([
-        //             'path' => $faker->imageUrl(640, 480, 'animals', true),
-        //             'costume_id' => $costume->id,
-        //         ]);
-        //     }
-        // }
+        foreach ($costumes as $costume) {
+            for ($i = 0; $i < 3; $i++) {
+                DB::table('costume_picts')->insert([
+                    'path' => $faker->imageUrl(640, 480, 'animals', true),
+                    'costume_id' => $costume->id,
+                ]);
+            }
+        }
     }
 }

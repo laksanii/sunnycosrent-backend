@@ -36,6 +36,7 @@ return new class extends Migration
             $table->decimal("total_price", 10, 0)->default(0);
             $table->decimal("shipping", 10, 0)->default(0);
             $table->string("shipping_status")->default('Diproses');
+            $table->string("return_receipt")->nullable();
             $table->string("return_status")->default('Belum dikembalikan');
             $table->string("return_pict", 2048)->nullable();
             $table->char("code", 15)->unique()->nullable();
