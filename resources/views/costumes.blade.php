@@ -40,7 +40,7 @@
                                 <td>{{ $costume->lp }}</td>
                                 <td>{{ $costume->category->name }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm">Edit</div>
+                                    <button class="btn btn-success btn-sm">Detail</button>
                                 </td>
                             </tr>
                         @endforeach

@@ -3,6 +3,12 @@
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Daftar Rental Belum Dikirim</h1>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -35,7 +41,9 @@
                                 <td>{{ $order->costume->name }}</td>
                                 <td>{{ $order->shipping_status }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm">Edit</div>
+                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal"
+                                        onclick="sendData('{{ $order->code }}')">Sudah
+                                        dikirim</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,4 +52,47 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kostum</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Form" action="/kirim" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="code" class="form-label">Kode Order</label>
+                            <input type="text" class="form-control" id="code" name="code" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="shipping_status" class="form-label">Resi</label>
+                            <input type="text" class="form-control" id="shipping_status" name="shipping_status">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" onclick="submitForm()" class="btn btn-success">Tambah</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        function sendData(code) {
+            const input = document.getElementById("code")
+            input.value = code
+
+        }
+
+        function submitForm() {
+            const form = document.getElementById("Form")
+            form.submit()
+        }
+    </script>
 @endsection

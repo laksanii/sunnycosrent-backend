@@ -35,7 +35,7 @@
                                 <td>{{ $order->costume->name }}</td>
                                 <td>{{ $order->payment_status }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm">Edit</div>
+                                    <a class="btn btn-success btn-sm" href="/rental/{{ $order->code }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

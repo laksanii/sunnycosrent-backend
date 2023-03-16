@@ -14,6 +14,13 @@ class OrderController extends Controller
             'orders' => Order::all()
         ]);
     }
+    public function detail($code)
+    {
+        return view('order', [
+            'order' => Order::where('code', $code)->first()
+        ]);
+    }
+
 
     public function alreadyShip()
     {
@@ -62,5 +69,16 @@ class OrderController extends Controller
         return view('lateReturned', [
             'orders' => Order::where('return_status', 'terlambat')->get()
         ]);
+    }
+
+    public function kirim(Request $request)
+    {
+        $code = $request->code;
+        $order = Order::where('code', $code)->first();
+        $order->shipping_status = $request->shipping_status;
+
+        $order->save();
+
+        return redirect()->back()->with('success', 'Berhasil mengubah status');
     }
 }
