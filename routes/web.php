@@ -22,6 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/costumes', [CostumeController::class, 'index']);
+Route::get('/costumes-available', [CostumeController::class, 'available']);
+Route::get('/costumes-booked', [CostumeController::class, 'booked']);
 
 Route::get('/import', function () {
     Excel::import(new CostumesImport, 'cost.xlsx');
