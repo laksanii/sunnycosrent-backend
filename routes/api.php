@@ -42,6 +42,7 @@ Route::post('/costume-pict', [CostumePictController::class, 'store']);
 
 Route::get('order', [OrderController::class, 'fetch']);
 Route::post('order', [OrderController::class, 'store']);
+Route::post('order/confirm', [OrderController::class, 'konfirmasi']);
 Route::post('order/return', [OrderController::class, 'pengembalian']);
 Route::get('order/costume-check', [OrderController::class, 'costumeCheck']);
 Route::get('order/{id}', [OrderController::class, 'fetchByCode']);

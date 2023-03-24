@@ -38,18 +38,5 @@ class DatabaseSeeder extends Seeder
                 'name' => $category
             ]);
         }
-
-        $faker = Faker::create();
-
-        $costumes = Costume::all();
-
-        foreach ($costumes as $costume) {
-            for ($i = 0; $i < 3; $i++) {
-                DB::table('costume_picts')->insert([
-                    'path' => $faker->imageUrl(640, 480, 'animals', true),
-                    'costume_id' => $costume->id,
-                ]);
-            }
-        }
     }
 }

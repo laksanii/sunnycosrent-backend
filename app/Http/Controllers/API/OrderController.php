@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use Carbon\CarbonImmutable;
 use Exception;
 use App\Models\Order;
 use App\Models\Costume;
 use App\Models\Accessory;
+use App\Models\ReturnPict;
+use App\Models\ConfirmPict;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
 use App\Models\OrderAccessories;
+use PhpParser\Node\Stmt\TryCatch;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\StoreCostumeRequest;
 use App\Http\Requests\UpdateCostumeRequest;
-use GuzzleHttp\Psr7\Response;
-use PhpParser\Node\Stmt\TryCatch;
 
 class OrderController extends Controller
 {
@@ -100,9 +102,9 @@ class OrderController extends Controller
 
             $numb = rand(1, 999) . date('dmy');
             $code = 'ORD' . str_pad($order->id, 3, "0", STR_PAD_LEFT) . str_pad($numb, 9, "0", STR_PAD_LEFT);
-            $ktp_pict_path = $request->file('KTP_pict')->store('public/' . $code . '/ktp_pict');
-            $ktp_selfie_path = $request->file('KTP_selfie')->store('public/' . $code . '/ktp_selfie');
-            $payment_pict_path = $request->file('payment_pict')->store('public/' . $code . '/payment_pict');
+            $ktp_pict_path = $request->file('KTP_pict')->store('public');
+            $ktp_selfie_path = $request->file('KTP_selfie')->store('public');
+            $payment_pict_path = $request->file('payment_pict')->store('public');
 
             $order->KTP_pict = $ktp_pict_path;
             $order->KTP_selfie = $ktp_selfie_path;
@@ -126,6 +128,35 @@ class OrderController extends Controller
         }
     }
 
+    // KONFIRMASI
+    public function konfirmasi(Request $request)
+    {
+        try {
+            $code = $request->code;
+            $order = Order::where('code', $code)->first();
+
+            if (!$order) {
+                throw new Exception('confirmation failed');
+            }
+
+            foreach ($request->file('confirm_pict') as $file) {
+                $path = $file->store('public');
+                ConfirmPict::create([
+                    'order_id' => $order->id,
+                    'path' => $path,
+                ]);
+            }
+
+            $order->shipping_status = 'Sudah diterima';
+
+            $order->save();
+
+            return ResponseFormatter::success($order, 'Confirmation successfully');
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 400);
+        }
+    }
+
     //PENGEMBALIAN
 
     public function pengembalian(Request $request)
@@ -137,11 +168,17 @@ class OrderController extends Controller
             if (!$order) {
                 throw new Exception('Return failed');
             }
-            $return_pict_path = $request->file('return_pict')->store('public/' . $code . '/return_pict');
+
+            foreach ($request->file('return_pict') as $file) {
+                $path = $file->store('public');
+                ReturnPict::create([
+                    'order_id' => $order->id,
+                    'path' => $path,
+                ]);
+            }
 
             $order->return_receipt = $request->resi;
             $order->return_status = 'Sedang dikirim kembali';
-            $order->return_pict = $return_pict_path;
 
             $order->save();
 
@@ -165,52 +202,6 @@ class OrderController extends Controller
             return ResponseFormatter::success(true, "Kostum available buat dirental ditanggal $request->rent_date");
         }
 
-        return ResponseFormatter::success(false, "Kostum tidak bisa dirental ditanggal $rent_date");
+        return ResponseFormatter::success(false, "Kostum tidak bisa dirental ditanggal " . $rent_date);
     }
-
-    // UPDATE
-    // public function update(UpdateCostumeRequest $request, $id)
-    // {
-    //     try {
-    //         //code...
-    //         $costume = Costume::find($id);
-
-    //         if (!$costume) {
-    //             throw new Exception('Costume not found');
-    //         }
-
-    //         // Update costume
-    //         $costume->update([
-    //             'name' => $request->name,
-    //             'category_id' => $request->category_id,
-    //             'sizes' => $request->sizes,
-    //             'ld' => $request->ld,
-    //             'lp' => $request->lp,
-    //             'price' => $request->price,
-    //         ]);
-
-    //         return ResponseFormatter::success($costume, 'Costume updated successfully');
-    //     } catch (Exception $e) {
-    //         return ResponseFormatter::error($e->getMessage(), 500);
-    //     }
-    // }
-
-    // // DELETE
-    // public function delete($id)
-    // {
-    //     try {
-    //         //code...
-    //         $costume = Costume::find($id);
-
-    //         if (!$costume) {
-    //             throw new Exception('Costume not found');
-    //         }
-
-    //         $costume->delete();
-
-    //         return ResponseFormatter::success('Costume deleted successfully');
-    //     } catch (Exception $e) {
-    //         return ResponseFormatter::error($e->getMessage(), 500);
-    //     }
-    // }
 }

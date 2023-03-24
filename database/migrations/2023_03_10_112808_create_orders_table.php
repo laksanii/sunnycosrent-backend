@@ -38,7 +38,6 @@ return new class extends Migration
             $table->string("shipping_status")->default('Diproses');
             $table->string("return_receipt")->nullable();
             $table->string("return_status")->default('Belum dikembalikan');
-            $table->string("return_pict", 2048)->nullable();
             $table->char("code", 15)->unique()->nullable();
             $table->timestamps();
         });

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Costume;
+use App\Models\ReturnPict;
+use App\Models\ConfirmPict;
 use App\Models\OrderAccessories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,5 +48,15 @@ class Order extends Model
     public function order_accessories()
     {
         return $this->hasMany(OrderAccessories::class);
+    }
+
+    public function confirm_pict()
+    {
+        return $this->hasMany(ConfirmPict::class);
+    }
+
+    public function return_pict()
+    {
+        return $this->hasMany(ReturnPict::class);
     }
 }
