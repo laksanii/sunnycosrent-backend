@@ -8,10 +8,19 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $orders = Order::query();
+
+        if ($request->start != null && $request->finish != null) {
+            $start = $request->start;
+            $finish = $request->finish;
+            $orders = Order::whereBetween('rent_date', [$start, $finish])->get();
+        } else {
+            $orders = Order::all();
+        }
         return view('orders', [
-            'orders' => Order::all(),
+            'orders' => $orders,
             'title' => "Daftar Rental"
         ]);
     }

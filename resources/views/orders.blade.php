@@ -9,6 +9,13 @@
                 Daftar Rental
             </div>
             <div class="card-body table-responsive">
+                Pilih tanggal:
+                <form action="/rental" method="get">
+                    @csrf
+                    <input type="date" name="start" id="start"> -
+                    <input type="date" name="finish" id="finish">
+                    <button class="btn btn-success btn-sm " type="submit">Cari</button>
+                </form>
                 <table id="dataTable" class="table nowrap pe-2 ">
                     <thead class="bg-success ">
                         <tr>
@@ -19,6 +26,8 @@
                             <th>Alamat</th>
                             <th>Kode Pos</th>
                             <th>Character</th>
+                            <th>Rent Date</th>
+                            <th>Ship Date</th>
                             <th>Status Pembayaran</th>
                             <th>Action</th>
                         </tr>
@@ -33,6 +42,8 @@
                                 <td>{{ $order->address }}</td>
                                 <td>{{ $order->post_code }}</td>
                                 <td>{{ $order->costume->name }}</td>
+                                <td>{{ $order->rent_date }}</td>
+                                <td>{{ $order->ship_date }}</td>
                                 <td>{{ $order->payment_status }}</td>
                                 <td>
                                     <a class="btn btn-success btn-sm" href="/rental/{{ $order->code }}">Detail</a>
