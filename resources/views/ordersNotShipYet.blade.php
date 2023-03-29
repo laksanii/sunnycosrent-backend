@@ -25,6 +25,8 @@
                             <th>Alamat</th>
                             <th>Kode Pos</th>
                             <th>Character</th>
+                            <th>Rent Date</th>
+                            <th>Ship Date</th>
                             <th>Status Pengiriman</th>
                             <th>Action</th>
                         </tr>
@@ -39,6 +41,8 @@
                                 <td>{{ $order->address }}</td>
                                 <td>{{ $order->post_code }}</td>
                                 <td>{{ $order->costume->name }}</td>
+                                <td>{{ $order->rent_date }}</td>
+                                <td>{{ $order->ship_date }}</td>
                                 <td>{{ $order->shipping_status }}</td>
                                 <td>
                                     <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal"
