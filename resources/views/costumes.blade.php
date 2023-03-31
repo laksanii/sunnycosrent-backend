@@ -40,7 +40,7 @@
                                 <td>{{ $costume->lp }}</td>
                                 <td>{{ $costume->category->name }}</td>
                                 <td>
-                                    <button class="btn btn-success btn-sm">Detail</button>
+                                    <a href="/costumes/{{ $costume->id }}" class="btn btn-success btn-sm">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

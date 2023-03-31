@@ -24,6 +24,30 @@ class CostumeController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+        return view('costume', [
+            'costume' => Costume::find($id),
+            'categories' => Category::all(),
+            'title' => "Detail Kostum"
+        ]);
+    }
+
+    public function edit($id, Request $request)
+    {
+        $costume = Costume::find($id);
+        $costume->name = $request->name;
+        $costume->sizes = $request->sizes;
+        $costume->price = $request->price;
+        $costume->ld = $request->ld;
+        $costume->lp = $request->lp;
+        $costume->category_id = $request->category_id;
+
+        $costume->save();
+
+        return redirect()->back();
+    }
+
     public function available(Request $request)
     {
         $start = date("Y-m-d");

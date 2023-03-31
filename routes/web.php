@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [CostumeController::class, 'index']);
 
     Route::get('/costumes', [CostumeController::class, 'index']);
+    Route::get('/costumes/{id}', [CostumeController::class, 'detail']);
+    Route::post('/costumes/{id}', [CostumeController::class, 'edit']);
     Route::get('/costumes-available', [CostumeController::class, 'available']);
     Route::get('/costumes-booked', [CostumeController::class, 'booked']);
 
