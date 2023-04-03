@@ -51,6 +51,22 @@
                             {{ $costume->price }}
                         </div>
                     </div>
+                    <div class="row mb-1 gap-1 justify-content-center">
+                        <div class="fw-bold col-4 bg-warning py-2 rounded">
+                            Aksesoris
+                        </div>
+                        <div class="col-7 bg-warning py-2 rounded">
+                            @if ($costume->accessories->count() > 0)
+                                <ul>
+                                    @foreach ($costume->accessories as $accessory)
+                                        <li>{{ $accessory->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                Costume Tidak Punya Akseoris
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
