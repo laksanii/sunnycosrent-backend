@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CostumeController;
 use App\Http\Controllers\UserController;
@@ -24,10 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [CostumeController::class, 'index']);
 
     Route::get('/costumes', [CostumeController::class, 'index']);
+    Route::post('/tambah-costume', [CostumeController::class, 'store']);
     Route::get('/costumes/{id}', [CostumeController::class, 'detail']);
     Route::post('/costumes/{id}', [CostumeController::class, 'edit']);
     Route::get('/costumes-available', [CostumeController::class, 'available']);
     Route::get('/costumes-booked', [CostumeController::class, 'booked']);
+
+    Route::get('/accessories', [AccessoryController::class, 'index']);
+    Route::post('/accessories', [AccessoryController::class, 'store']);
+    Route::post('/accessories/delete', [AccessoryController::class, 'delete']);
 
     Route::get('/rental', [OrderController::class, 'index']);
     Route::get('/rental/{code}', [OrderController::class, 'detail']);
@@ -41,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/kirim', [OrderController::class, 'kirim']);
     Route::post('/sudah-bayar', [OrderController::class, 'sudahBayar']);
 
-    Route::post('/tambah-costume', [CostumeController::class, 'store']);
+
 
     Route::post('/logout', [UserController::class, 'logout']);
 });
