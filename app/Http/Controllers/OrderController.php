@@ -110,4 +110,13 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil mengubah status');
     }
+
+    public function cancel(Request $request)
+    {
+        $order = Order::find($request->id);
+        $order->payment_status = "Cancel";
+        $order->save();
+
+        return redirect()->back()->with('success', 'Rental berhasil dibatalkan');
+    }
 }

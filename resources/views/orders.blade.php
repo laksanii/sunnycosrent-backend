@@ -3,6 +3,12 @@
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Daftar Rental</h1>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -45,8 +51,20 @@
                                 <td>{{ $order->rent_date }}</td>
                                 <td>{{ $order->ship_date }}</td>
                                 <td>{{ $order->payment_status }}</td>
-                                <td>
+                                <td class="d-flex gap-2">
                                     <a class="btn btn-success btn-sm" href="/rental/{{ $order->code }}">Detail</a>
+                                    @if ($order->payment_status != 'Cancel')
+                                        <div>
+                                            <form action="/cancel" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $order->id }}">
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach

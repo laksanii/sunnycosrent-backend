@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pengembalian-terlambat', [OrderController::class, 'lateReturned']);
     Route::post('/kirim', [OrderController::class, 'kirim']);
     Route::post('/sudah-bayar', [OrderController::class, 'sudahBayar']);
+    Route::post('/cancel', [OrderController::class, 'cancel']);
 
 
 

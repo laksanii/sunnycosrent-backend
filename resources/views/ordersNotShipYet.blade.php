@@ -45,6 +45,7 @@
                                 <td>{{ $order->ship_date }}</td>
                                 <td>{{ $order->shipping_status }}</td>
                                 <td>
+                                    <a class="btn btn-success btn-sm" href="/rental/{{ $order->code }}">Detail</a>
                                     <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal"
                                         onclick="sendData('{{ $order->code }}')">Sudah
                                         dikirim</button>

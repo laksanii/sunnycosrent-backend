@@ -45,6 +45,7 @@
                                 <td>{{ $order->ship_date }}</td>
                                 <td>{{ $order->payment_status }}</td>
                                 <td>
+                                    <a class="btn btn-success btn-sm" href="/rental/{{ $order->code }}">Detail</a>
                                     <form action="/sudah-bayar" method="post">
                                         @csrf
                                         <input type="text" name="code" id="code" value="{{ $order->code }}"
