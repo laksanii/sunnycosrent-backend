@@ -11715,3 +11715,7 @@ body {
   object-fit: contain;
 
 }
+
+.picts-box{
+  min-height: 200px;
+}

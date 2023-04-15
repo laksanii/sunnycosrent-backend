@@ -152,5 +152,35 @@
                 </div>
             </div>
         </div>
+        <div class="card mb-4 picts-box">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bukti Konfirmasi Diterima
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach ($order->confirm_pict as $pict)
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <img src="{{ Storage::url($pict->path) }}" alt="confirm_pict" style="width: 100%">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4 picts-box">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bukti Pengembalian
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach ($order->return_pict as $pict)
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <img src="{{ Storage::url($pict->path) }}" alt="confirm_pict" style="width: 100%">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
