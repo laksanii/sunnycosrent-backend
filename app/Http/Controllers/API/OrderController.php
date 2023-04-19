@@ -111,14 +111,15 @@ class OrderController extends Controller
             $order->payment_pict = $payment_pict_path;
             $order->code = $code;
             $order->save();
+            // dd($request->accessories);
             if ($request->accessories) {
                 foreach ($request->accessories as $accessory) {
                     $accessory_detail = Accessory::find($accessory);
-                    $orderAccessory = OrderAccessories::create([
-                        'order_id' => $order->id,
-                        'accessory_id' => $accessory,
-                        'price' => $accessory_detail->price
-                    ]);
+                    $orderAccsessory = new OrderAccessories;
+                    $orderAccsessory->order_id = $order->id;
+                    $orderAccsessory->accessories_id = $accessory;
+                    $orderAccsessory->price = $accessory_detail->price;
+                    $orderAccsessory->save();
                 }
             }
 
