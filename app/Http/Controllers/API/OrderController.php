@@ -100,6 +100,7 @@ class OrderController extends Controller
                     'total_price' => $request->total_payment,
                     'payment' => $request->payment,
                     'DP' => $request->DP,
+                    'shipping' => $request->shipping,
                 ]);
 
                 if (!$order) {
@@ -123,7 +124,7 @@ class OrderController extends Controller
                         $accessory_detail = Accessory::find($accessory);
                         $orderAccsessory = new OrderAccessories;
                         $orderAccsessory->order_id = $order->id;
-                        $orderAccsessory->accessories_id = $accessory;
+                        $orderAccsessory->accessory_id = $accessory;
                         $orderAccsessory->price = $accessory_detail->price;
                         $orderAccsessory->save();
                     }

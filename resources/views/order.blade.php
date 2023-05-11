@@ -125,7 +125,7 @@
                                 @else
                                     <ul>
                                         @foreach ($order->order_accessories as $accessory)
-                                            <li>{{ $accessory->name }}</li>
+                                            <li>{{ $accessory->accessory->name }}</li>
                                         @endforeach
                                     </ul>
                                 @endif

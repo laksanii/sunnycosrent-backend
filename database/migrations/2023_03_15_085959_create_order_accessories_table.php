@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('order_accessories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("order_id")->unsigned();
-            $table->bigInteger("accessories_id")->unsigned();
+            $table->bigInteger("accessory_id")->unsigned();
             $table->decimal("price", 10, 0);
             $table->timestamps();
         });

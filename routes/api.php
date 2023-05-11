@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\AddressController;
 use App\Http\Controllers\API\CostumeController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\AccessoryController;
@@ -46,3 +47,7 @@ Route::post('order/confirm', [OrderController::class, 'konfirmasi']);
 Route::post('order/return', [OrderController::class, 'pengembalian']);
 Route::get('order/costume-check', [OrderController::class, 'costumeCheck']);
 Route::get('order/{id}', [OrderController::class, 'fetchByCode']);
+
+Route::get('/provinces', [AddressController::class, 'getProvinces']);
+Route::get('/cities', [AddressController::class, 'getCities']);
+Route::post('/cost', [AddressController::class, 'getCost']);
