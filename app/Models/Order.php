@@ -52,11 +52,11 @@ class Order extends Model
 
     public function confirm_pict()
     {
-        return $this->hasMany(ConfirmPict::class);
+        return $this->hasOne(ConfirmPict::class);
     }
 
     public function return_pict()
     {
-        return $this->hasMany(ReturnPict::class);
+        return $this->hasOne(ReturnPict::class);
     }
 }

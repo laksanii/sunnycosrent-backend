@@ -159,11 +159,11 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @foreach ($order->confirm_pict as $pict)
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <img src="{{ Storage::url($pict->path) }}" alt="confirm_pict" style="width: 100%">
-                        </div>
-                    @endforeach
+                    @if ($order->confirm_pict == null)
+                        Belum Dikonfirmasi
+                    @else
+                        <a href="{{ $order->confirm_pict->path }}">Buka</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -174,11 +174,11 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @foreach ($order->return_pict as $pict)
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <img src="{{ Storage::url($pict->path) }}" alt="confirm_pict" style="width: 100%">
-                        </div>
-                    @endforeach
+                    @if ($order->return_pict == null)
+                        Belum Dikirim Kembali
+                    @else
+                        <a href="{{ $order->return_pict->path }}">Buka</a>
+                    @endif
                 </div>
             </div>
         </div>
