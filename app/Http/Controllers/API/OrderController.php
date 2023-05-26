@@ -155,13 +155,10 @@ class OrderController extends Controller
                 throw new Exception('confirmation failed');
             }
 
-            foreach ($request->file('confirm_pict') as $file) {
-                $path = $file->store('public');
-                ConfirmPict::create([
-                    'order_id' => $order->id,
-                    'path' => $path,
-                ]);
-            }
+            ConfirmPict::create([
+                'order_id' => $order->id,
+                'path' => $request->confirm_pict,
+            ]);
 
             $order->shipping_status = 'Sudah diterima';
 
