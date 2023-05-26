@@ -130,6 +130,11 @@ class OrderController extends Controller
                     }
                 }
 
+                if ($order->total_price == $order->DP) {
+                    $order->payment_status = 'lunas';
+                    $order->save();
+                }
+
                 return ResponseFormatter::success($order, 'Book berhasil');
             } else {
                 throw new Exception('Costume sudah dirental ditanggal tersebut');
