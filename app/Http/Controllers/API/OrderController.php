@@ -155,10 +155,16 @@ class OrderController extends Controller
                 throw new Exception('confirmation failed');
             }
 
-            ConfirmPict::create([
-                'order_id' => $order->id,
-                'path' => $request->confirm_pict,
-            ]);
+            $confirm = ConfirmPict::where('order_id', $order->id)->first();
+            if ($confirm) {
+                $confirm->path = $request->confirm_pict;
+                $confirm->save();
+            } else {
+                ConfirmPict::create([
+                    'order_id' => $order->id,
+                    'path' => $request->confirm_pict,
+                ]);
+            }
 
             $order->shipping_status = 'Sudah diterima';
 
@@ -182,10 +188,16 @@ class OrderController extends Controller
                 throw new Exception('Return failed');
             }
 
-            ReturnPict::create([
-                'order_id' => $order->id,
-                'path' => $request->return_pict,
-            ]);
+            $return = ReturnPict::where('order_id', $order->id)->first();
+            if ($return) {
+                $return->path = $request->return_pict;
+                $return->save();
+            } else {
+                ReturnPict::create([
+                    'order_id' => $order->id,
+                    'path' => $request->return_pict,
+                ]);
+            }
 
             $order->return_receipt = $request->resi;
             $order->return_status = 'Sedang dikirim kembali';
