@@ -182,13 +182,10 @@ class OrderController extends Controller
                 throw new Exception('Return failed');
             }
 
-            foreach ($request->file('return_pict') as $file) {
-                $path = $file->store('public');
-                ReturnPict::create([
-                    'order_id' => $order->id,
-                    'path' => $path,
-                ]);
-            }
+            ReturnPict::create([
+                'order_id' => $order->id,
+                'path' => $request->return_pict,
+            ]);
 
             $order->return_receipt = $request->resi;
             $order->return_status = 'Sedang dikirim kembali';
